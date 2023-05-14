@@ -7,7 +7,12 @@
 const getItem = <T = unknown>(key: string): T | null => {
   const value = window.localStorage.getItem(key);
   if (!value) return null;
-  return JSON.parse(value);
+
+  if (typeof value !== 'string') {
+    return JSON.parse(value);
+  } else {
+    return value as T;
+  }
 };
 
 /**

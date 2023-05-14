@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CreateMailBox from 'pages/CreateMailBox/CreateMailBox';
 import Home from 'pages/Home/Home';
+import KakaoCallback from 'pages/Login/KakaoCallback';
 import Login from 'pages/Login/Login';
 import Mail from 'pages/Mail/Mail.[id]';
 import MailList from 'pages/MailList/MailList';
@@ -45,6 +46,7 @@ const Router = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/users/callback" element={<KakaoCallback />} />
         <Route path="/create-message" element={<Post />} />
       </Routes>
     </BrowserRouter>

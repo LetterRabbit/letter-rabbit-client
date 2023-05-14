@@ -6,7 +6,7 @@ interface Props {
 }
 
 const PrivateRoute = ({ children }: Props) => {
-  const isAuthenticated = getItem('token');
+  const isAuthenticated = getItem('access_token') ?? '';
 
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
