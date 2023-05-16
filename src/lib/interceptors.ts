@@ -12,9 +12,9 @@ export interface ConsoleError {
 export const requestInterceptor = (
   config: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
-  const token = '';
+  const token = localStorage.getItem('access_token') || '';
   if (token) {
-    config.headers.set('Authorization', `Bearer ${token}`);
+    config.headers.set('access', token);
   }
   return config;
 };
