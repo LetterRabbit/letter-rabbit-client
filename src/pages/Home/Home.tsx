@@ -1,39 +1,81 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { cn } from 'styles/utils';
+
+import { useCreateMailBoxMutation } from 'services/queries/letter.query';
+import css from './Home.module.scss';
 
 const Home = () => {
-  const [count, setCount] = useState(0);
+  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [currentMailBoxInfo, setCurrentMailBoxInfo] = useState({
+    id: 0,
+    placement: '',
+  });
+
+  const { mutate } = useCreateMailBoxMutation();
+
+  const onClickPlacement = (id: number, name: string) => () =>
+    mutate(
+      { mailbox_position_id: id, name },
+      {
+        onSuccess: () => {
+          setIsModalOpened(true);
+          setCurrentMailBoxInfo({ id, placement: name });
+        },
+      }
+    );
+
+  const toggleModal = (
+    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => {
+    event.preventDefault();
+    setIsModalOpened(prev => !prev);
+  };
 
   return (
-    <main className="container">
+    <main className={cn('container', css.container)}>
+      <h1>당신의 소중함을 둘 위치를 지정해주세요!</h1>
       <div className="grid">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div>10</div>
-        <div>11</div>
-        <div>12</div>
+        {MAILBOX_PLACEMENT_LIST.map(({ id, placement }) => (
+          <article
+            key={id}
+            onClick={onClickPlacement(id, placement)}
+            className={css.touchableOpacity}
+          >
+            {placement}
+          </article>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button>pico button</button>
-        <button onClick={() => setCount(count => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <dialog open={isModalOpened}>
+        <article>
+          <a aria-label="Close" className="close" onClick={toggleModal}></a>
+          <h1>소중함을 {currentMailBoxInfo.placement}에 올려놨어요</h1>
+          <h2>소중함 공간으로 이동할까요?</h2>
+
+          <footer>
+            <a
+              href="#confirm"
+              className="secondary"
+              role="button"
+              onClick={toggleModal}
+            >
+              노노 좀 이따요 🤷🏻‍♀️
+            </a>
+            <a href="#confirm" role="button" onClick={toggleModal}>
+              넹~ 🙋🏻‍♂️
+            </a>
+          </footer>
+        </article>
+      </dialog>
     </main>
   );
 };
 
 export default Home;
+
+const MAILBOX_PLACEMENT_LIST = [
+  { id: 1, placement: '책상 위' },
+  { id: 2, placement: '침대 아래' },
+  { id: 3, placement: '서랍' },
+  { id: 4, placement: '옷장' },
+];
