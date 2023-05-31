@@ -1,37 +1,42 @@
-import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useOpenMailBox } from 'services/queries/letter.query';
 import { MailBox } from 'services/types/letter';
+import back from '../../../assets/back.png';
 import css from './ListBox.module.scss';
 
 const ListBox = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.toString();
+  const [skip, setSkip] = useState(0);
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  const { data, refetch } = useOpenMailBox(`?${query}`);
+  const { data, refetch } = useOpenMailBox(`?limit=5&skip=${skip}`);
   const count = data?.total_count || 0;
   const pageArr = new Array(Math.ceil(count / 5)).fill(1);
 
   useEffect(() => {
     refetch();
-  }, [query]);
-
-  const handlePageBtn = (num: number) => {
-    searchParams.set('skip', String(num));
-    searchParams.set('limit', '5');
-    setSearchParams(searchParams);
-  };
+  }, [skip]);
 
   return (
     <div className={css.container}>
+      <div className={css.iconWrap}>
+        <img
+          src={back}
+          alt="back button"
+          className={css.back}
+          onClick={() => {
+            navigate(`/mailbox/${id}`, { state: true });
+          }}
+        />
+      </div>
       {data?.result.map((list: MailBox) => {
         return (
           <button
             key={list.id}
             onClick={() => {
-              navigate(`/mailbox/${list.id}`);
+              navigate(`/mail/${list.id}`);
             }}
           >
             From. {list.username}
@@ -44,7 +49,7 @@ const ListBox = () => {
             <button
               key={num + index}
               onClick={() => {
-                handlePageBtn(index * 5);
+                setSkip(index * 5);
               }}
             >
               {num + index}
