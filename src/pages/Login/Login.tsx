@@ -27,5 +27,4 @@ export const kakaoQueryData = {
 };
 
 export const KAKAO_BASIC_OAUTH_URL = 'https://kauth.kakao.com/oauth/authorize?';
-
 export const KAKAO_TOKEN_OAUTH_URL = 'https://kauth.kakao.com/oauth/token?';

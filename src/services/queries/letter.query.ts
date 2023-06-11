@@ -1,6 +1,10 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { createMailBox, getLetterList } from '../api/letter.service';
+import {
+  createMailBox,
+  getLetterList,
+  getMailBox,
+} from '../api/letter.service';
 
 export const useArticlesQuery = (params: any) =>
   useQuery(['getArticles', { params }], async () => {
@@ -17,3 +21,9 @@ export const useArticlesQuery = (params: any) =>
 export const useCreateMailBoxMutation = () => {
   return useMutation((body: Record<string, any>) => createMailBox(body));
 };
+
+export const useOpenMailBox = (query: string) =>
+  useQuery(['getMailBox'], async () => {
+    const res = await getMailBox(query);
+    return res;
+  });
