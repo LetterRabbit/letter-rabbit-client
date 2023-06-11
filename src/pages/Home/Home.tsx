@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from 'styles/utils';
 
 import { useCreateMailBoxMutation } from 'services/queries/letter.query';
@@ -9,20 +10,22 @@ const Home = () => {
   const [currentMailBoxInfo, setCurrentMailBoxInfo] = useState({
     id: 0,
     placement: '',
+    uuid: '',
   });
 
   const { mutate } = useCreateMailBoxMutation();
 
-  const onClickPlacement = (id: number, name: string) => () =>
+  const onClickPlacement = (id: number, name: string) => () => {
     mutate(
       { mailbox_position_id: id, name },
       {
-        onSuccess: () => {
+        onSuccess: uuid => {
           setIsModalOpened(true);
-          setCurrentMailBoxInfo({ id, placement: name });
+          setCurrentMailBoxInfo({ id, placement: name, uuid });
         },
       }
     );
+  };
 
   const toggleModal = (
     event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
@@ -53,17 +56,15 @@ const Home = () => {
           <h2>소중함 공간으로 이동할까요?</h2>
 
           <footer>
-            <a
-              href="#confirm"
-              className="secondary"
-              role="button"
-              onClick={toggleModal}
-            >
+            <button className="secondary" onClick={toggleModal}>
               노노 좀 이따요 🤷🏻‍♀️
-            </a>
-            <a href="#confirm" role="button" onClick={toggleModal}>
+            </button>
+            <Link
+              className="primary"
+              to={`/mailbox/${currentMailBoxInfo.uuid}`}
+            >
               넹~ 🙋🏻‍♂️
-            </a>
+            </Link>
           </footer>
         </article>
       </dialog>

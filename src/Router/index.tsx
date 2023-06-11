@@ -22,11 +22,21 @@ const Router = () => {
             </PrivateRoute>
           }
         />
+        {/* Mail List Page */}
         <Route
-          path="/mailbox"
+          path="/mailbox/:id"
           element={
             <PrivateRoute>
               <MailList />
+            </PrivateRoute>
+          }
+        />
+        {/* Mail Detail Page */}
+        <Route
+          path="/mail/:id"
+          element={
+            <PrivateRoute>
+              <Mail />
             </PrivateRoute>
           }
         />
@@ -38,14 +48,7 @@ const Router = () => {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/mailbox/:id"
-          element={
-            <PrivateRoute>
-              <Mail />
-            </PrivateRoute>
-          }
-        />
+
         <Route path="/users/callback" element={<KakaoCallback />} />
         <Route path="/create-message" element={<Post />} />
       </Routes>

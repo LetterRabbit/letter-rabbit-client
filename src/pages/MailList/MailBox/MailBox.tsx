@@ -1,3 +1,4 @@
+import ShareButton from 'components/domain/ShareButton';
 import mail from '../../../assets/react.svg';
 import css from './MailBox.module.scss';
 
@@ -15,7 +16,7 @@ const MailBox = ({ handleOpenBox }: Props) => {
       <button className={css.button} onClick={handleOpenBox}>
         소중함 열기
       </button>
-      <button className={css.button}>소중함 링크 공유하기</button>
+      <ShareButton />
     </div>
   );
 };
