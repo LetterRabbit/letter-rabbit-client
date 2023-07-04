@@ -18,6 +18,11 @@ export interface GetMailBoxResponse {
   result: MailBox[];
 }
 
+export interface GetMail {
+  letters: MailBox;
+  total_list: number[];
+}
+
 export type MailBox = {
   id: number;
   username: string;

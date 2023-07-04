@@ -5,6 +5,20 @@
   flex-direction: column;
 }
 
+.iconWrap {
+  position: fixed;
+  width: 465px;
+  top: 0;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.back {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
 .pageNationBox {
   display: flex;
   gap: 10px;
