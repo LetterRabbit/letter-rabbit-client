@@ -1,36 +1,30 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { api } from 'lib/api';
-import { cn } from 'styles/utils';
 
-interface Props {
-  className?: string;
-}
+import Button from 'components/Button/Button';
+import Modal from 'components/Modal/Modal';
+import css from './ShareButton.module.scss';
 
-const ShareButton = (props: Props) => {
-  const { className = '' } = props;
+const ShareButton = () => {
   const [qrCode, setQrCode] = useState({
     self_domain: '',
     qr_domain: '',
   });
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  const toggleModal = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
-  ) => {
-    event.preventDefault();
+  const toggleModal = () => {
     setIsModalOpened(prev => !prev);
+    onClickQrGenBtn();
   };
 
-  const onClickQrGenBtn = async (
-    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
-  ) => {
+  const onClickQrGenBtn = async () => {
     const { data, status } = await api.get(`/users/qr`);
 
     if (status !== 201) {
       return alert('QR코드 생성에 실패했습니다. 다시 한번 시도해주세요');
+      setIsModalOpened(prev => !prev);
     }
 
-    toggleModal(event);
     setQrCode(data);
   };
 
@@ -42,25 +36,25 @@ const ShareButton = (props: Props) => {
 
   return (
     <div>
-      <button className={cn('primary', className)} onClick={onClickQrGenBtn}>
-        소중함 링크 공유하기
-      </button>
+      <Button
+        size="large"
+        type="main"
+        title="소중함 알려주기"
+        clickAction={toggleModal}
+      />
 
-      <dialog open={isModalOpened}>
-        <article>
-          <a aria-label="Close" className="close" onClick={toggleModal}></a>
-          <h1>QR 코드~~</h1>
+      {isModalOpened && (
+        <Modal
+          confirmAction={onClickClipboard}
+          cancleAction={() => setIsModalOpened(prev => !prev)}
+        >
+          <span className={css.description}>
+            소중함의 QR코드를 <br />
+            복사할까요?
+          </span>
           <img src={qrCode.qr_domain} alt="QR 코드" />
-          <button className="primary" onClick={onClickClipboard}>
-            링크 복사하기
-          </button>
-          <footer>
-            <a href="#confirm" role="button" onClick={toggleModal}>
-              넹~ 🙋🏻‍♂️
-            </a>
-          </footer>
-        </article>
-      </dialog>
+        </Modal>
+      )}
     </div>
   );
 };

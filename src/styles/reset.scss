@@ -77,7 +77,6 @@ main {
 
 body {
   line-height: 1;
-  max-width: 480px;
   margin: 0 auto;
 }
 
@@ -105,25 +104,25 @@ table {
 }
 
 // TODO: pico css reset에 의해 아래 코드는 추후 필요
-// input {
-//   -webkit-appearance: none;
-//   border: none;
-//   border-radius: 0;
-//   padding: 0;
-//   margin: 0;
-//   outline: none;
-// }
+input {
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
 
-// button {
-//   padding: 0;
-//   border: 0;
-//   outline: none;
-//   background-color: white;
-//   cursor: pointer;
-// }
+button {
+  padding: 0;
+  border: 0;
+  outline: none;
+  background-color: white;
+  cursor: pointer;
+}
 
-// a {
-//   color: black;
-//   text-decoration: none;
-//   cursor: pointer;
-// }
+a {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

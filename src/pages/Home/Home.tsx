@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { cn } from 'styles/utils';
 
+import Modal from 'components/Modal/Modal';
+import PointText from 'components/PointText/PointText';
 import { useCreateMailBoxMutation } from 'services/queries/letter.query';
 import css from './Home.module.scss';
 
@@ -13,6 +15,7 @@ const Home = () => {
     uuid: '',
   });
 
+  const navigate = useNavigate();
   const { mutate } = useCreateMailBoxMutation();
 
   const onClickPlacement = (id: number, name: string) => () => {
@@ -27,17 +30,12 @@ const Home = () => {
     );
   };
 
-  const toggleModal = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
-  ) => {
-    event.preventDefault();
-    setIsModalOpened(prev => !prev);
-  };
-
   return (
     <main className={cn('container', css.container)}>
-      <h1>당신의 소중함을 둘 위치를 지정해주세요!</h1>
-      <div className="grid">
+      <h2 className={css.mainTitle}>
+        당신의 <PointText type="box" />을 둘 위치를 정해주세요
+      </h2>
+      <div className={css.listBox}>
         {MAILBOX_PLACEMENT_LIST.map(({ id, placement }) => (
           <article
             key={id}
@@ -48,26 +46,18 @@ const Home = () => {
           </article>
         ))}
       </div>
-
-      <dialog open={isModalOpened}>
-        <article>
-          <a aria-label="Close" className="close" onClick={toggleModal}></a>
-          <h1>소중함을 {currentMailBoxInfo.placement}에 올려놨어요</h1>
-          <h2>소중함 공간으로 이동할까요?</h2>
-
-          <footer>
-            <button className="secondary" onClick={toggleModal}>
-              노노 좀 이따요 🤷🏻‍♀️
-            </button>
-            <Link
-              className="primary"
-              to={`/mailbox/${currentMailBoxInfo.uuid}`}
-            >
-              넹~ 🙋🏻‍♂️
-            </Link>
-          </footer>
-        </article>
-      </dialog>
+      <div></div>
+      {isModalOpened && (
+        <Modal
+          confirmAction={() => navigate(`/mailbox/${currentMailBoxInfo.uuid}`)}
+          cancleAction={() => setIsModalOpened(prev => !prev)}
+        >
+          <span className={css.description}>
+            소중함을 {currentMailBoxInfo.placement}에 올려놨어요 <br />
+            소중함으로 이동할까요?
+          </span>
+        </Modal>
+      )}
     </main>
   );
 };
@@ -75,8 +65,8 @@ const Home = () => {
 export default Home;
 
 const MAILBOX_PLACEMENT_LIST = [
-  { id: 1, placement: '책상 위' },
-  { id: 2, placement: '침대 아래' },
+  { id: 1, placement: '책상' },
+  { id: 2, placement: '침대' },
   { id: 3, placement: '서랍' },
   { id: 4, placement: '옷장' },
 ];
