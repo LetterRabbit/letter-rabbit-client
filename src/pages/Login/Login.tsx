@@ -1,14 +1,25 @@
+import Button from 'components/Button/Button';
 import { getQueryString } from 'utils/queryString';
+import logo from '../../assets/logo.svg';
 import css from './Login.module.scss';
 
 const Login = () => {
   return (
-    <div className={css.container}>
-      <main className={css.loginWrapper}>
-        <h1>Login</h1>
-        <button onClick={getKakaoAuth}>Kakao Login</button>
-      </main>
-    </div>
+    <main className={css.loginWrapper}>
+      <img src={logo} alt="test" />
+      <h1 className={css.title}>너를 위함</h1>
+      <h2 className={css.subTitle}>
+        당신의 <strong>소중함</strong>을 전달하세요
+      </h2>
+      <div className={css.btnWrap}>
+        <Button
+          type="kakao"
+          font="bold"
+          title="카카오톡으로 시작하기"
+          clickAction={getKakaoAuth}
+        />
+      </div>
+    </main>
   );
 };
 

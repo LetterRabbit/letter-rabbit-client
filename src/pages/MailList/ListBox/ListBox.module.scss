@@ -1,8 +1,8 @@
+@import '@/styles/mixins';
+
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  @include column-flexbox();
+  gap: 20px;
 }
 
 .iconWrap {
@@ -21,5 +21,10 @@
 
 .pageNationBox {
   display: flex;
+  align-items: center;
   gap: 10px;
+}
+
+.pageMoveBtn {
+  cursor: pointer;
 }

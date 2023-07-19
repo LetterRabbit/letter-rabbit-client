@@ -1,0 +1,18 @@
+@import '@/styles/color';
+
+.container {
+  position: relative;
+  display: inline;
+}
+
+.icon {
+  position: absolute;
+  top: -27px;
+  left: 10px;
+  margin: 0 auto;
+  color: $mainBlack;
+}
+
+.text {
+  font-weight: 700;
+}

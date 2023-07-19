@@ -1,0 +1,11 @@
+@import '@/styles/color';
+
+.description {
+  width: 200px;
+  line-height: 1.4;
+  font-size: 16px;
+  font-weight: 600;
+  color: $mainBlack;
+  text-align: center;
+  word-wrap: break-word;
+}

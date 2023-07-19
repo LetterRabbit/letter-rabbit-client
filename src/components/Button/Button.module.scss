@@ -1,0 +1,62 @@
+@import '@/styles/color';
+
+.large {
+  width: 280px;
+  height: 60px;
+}
+
+.medium {
+  width: 100px;
+  height: 30px;
+}
+
+.small {
+  width: 36px;
+  height: 42px;
+}
+
+.kakao {
+  background-color: $kakao;
+  border: none;
+}
+
+.main {
+  background-color: $mainButton;
+  border: none;
+}
+
+.choice {
+  background-color: inherit;
+  border: 3px solid $buttonBorder;
+}
+
+.confirm {
+  background-color: white;
+  border: 2px solid $confirmButton;
+}
+
+.cancle {
+  background-color: white;
+  border: 2px solid $cancleButton;
+}
+
+.number {
+  background-color: $mainButton;
+  border: 1px solid $buttonBorder;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.default {
+  border-radius: 8px;
+  color: black;
+  font-size: 14px;
+  margin: 0;
+  transition: all 300ms ease-in-out;
+}

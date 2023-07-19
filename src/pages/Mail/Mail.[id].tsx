@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useOpenMail } from 'services/queries/letter.query';
-import back from '../../assets/back.png';
 import css from './Mail.module.scss';
 
 const Mail = () => {
@@ -33,7 +32,7 @@ const Mail = () => {
     <section className={css.container}>
       <div className={css.iconWrap}>
         <img
-          src={back}
+          src=""
           alt="back button"
           className={css.back}
           onClick={() => {

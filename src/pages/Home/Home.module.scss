@@ -1,13 +1,35 @@
 @import '@/styles/mixins';
+@import '@/styles/color';
 
 .container {
-  padding: 40px;
+  @include column-flexbox('between');
+  position: relative;
+  padding: 60px 50px;
+  height: 100vh;
+}
+
+.mainTitle {
+  margin-top: 100px;
+  font-weight: 400;
+  color: $mainBlack;
+}
+
+.listBox {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .touchableOpacity {
   @include flexbox();
-  font-weight: 700;
-  color: #fff;
+  margin: 0;
+  width: 280px;
+  height: 60px;
+  font-weight: 400;
+  border: 3px solid $buttonBorder;
+  border-radius: 8px;
+  background-color: inherit;
+  color: $mainBlack;
   transition: opacity 300ms ease-in-out;
 
   &:hover {
@@ -17,4 +39,14 @@
   &:active {
     opacity: 0.5;
   }
+}
+
+.description {
+  width: 200px;
+  line-height: 1.4;
+  font-size: 16px;
+  font-weight: 600;
+  color: $mainBlack;
+  text-align: center;
+  word-wrap: break-word;
 }
