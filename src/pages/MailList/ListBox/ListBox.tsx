@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import Button from 'components/Button/Button';
 import { useOpenMailBox } from 'services/queries/letter.query';
@@ -10,17 +10,21 @@ import css from './ListBox.module.scss';
 
 const ListBox = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const skip = searchParams.get('skip');
+
   const [startNum, setStartNum] = useState(1);
   const [currentNum, setCurrentNum] = useState(1);
 
   const navigate = useNavigate();
-  const skip = searchParams.get('skip');
+  const location = useLocation();
 
   const { data, refetch } = useOpenMailBox(`?limit=5&skip=${skip}`);
   const count = data?.total_count || 0;
 
   useEffect(() => {
     refetch();
+    setStartNum(1 + Math.floor(Number(skip) / 5 / 5) * 5);
+    setCurrentNum((Number(skip) + 5) / 5);
   }, [skip]);
 
   const maxNum = 5;
@@ -49,7 +53,7 @@ const ListBox = () => {
     if (type === 'prev') {
       if (startNum === 1) return alert('첫 페이지입니다!');
       setStartNum(prev => prev - maxNum);
-      handlePageBtn((startNum - maxNum + 1) * maxNum);
+      handlePageBtn((startNum - maxNum - 1) * maxNum);
     } else {
       if (pageArr.includes(endNum)) return alert('마지막 페이지입니다!');
       setStartNum(prev => prev + maxNum);
@@ -66,7 +70,11 @@ const ListBox = () => {
               key={list.id}
               type="choice"
               title={`From. ${list.username}`}
-              clickAction={() => navigate(`/mail/${list.id}`)}
+              clickAction={() =>
+                navigate(`/mail/${list.id}`, {
+                  state: location.pathname + location.search,
+                })
+              }
             />
           );
         })}
