@@ -14,9 +14,9 @@ const MailList = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.state === null) return;
-    setIsOpenMailBox(location.state);
-  }, [location]);
+    if (location.search === '') return;
+    setIsOpenMailBox(false);
+  }, [location.search]);
 
   const handleBackButton = () => {
     setIsOpenMailBox(prev => !prev);

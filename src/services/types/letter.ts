@@ -19,13 +19,16 @@ export interface GetMailBoxResponse {
 }
 
 export interface GetMail {
-  letters: MailBox;
+  id: number;
+  username: string;
+  desc: string;
+  created_at: string;
   total_list: number[];
 }
 
 export type MailBox = {
   id: number;
   username: string;
-  description: string;
-  created_date: string;
+  desc: string;
+  created_at: string;
 };
