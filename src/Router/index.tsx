@@ -50,7 +50,7 @@ const Router = () => {
         />
 
         <Route path="/users/callback" element={<KakaoCallback />} />
-        <Route path="/create-message" element={<Post />} />
+        <Route path="/create-message/:id" element={<Post />} />
       </Routes>
     </BrowserRouter>
   );

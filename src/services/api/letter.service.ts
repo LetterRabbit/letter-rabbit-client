@@ -2,6 +2,7 @@ import { api } from 'lib/api';
 
 import {
   type GetLetterResponse,
+  type GetLetterUser,
   type GetMail,
   type GetMailBoxResponse,
   type MockParamType,
@@ -24,5 +25,20 @@ export const getMailBox = async (query: string) => {
 
 export const getMail = async (params: string) => {
   const { data } = await api.get<GetMail>(`/mailbox/open/${params}`);
+  return data;
+};
+
+export const postMail = async (
+  params: string,
+  body: Record<string, string>
+) => {
+  const { data } = await api.post(`/letter/write?address=${params}`, body);
+  return data;
+};
+
+export const getUser = async (params: string) => {
+  const { data } = await api.get<GetLetterUser>(
+    `/letter/open?address=${params}`
+  );
   return data;
 };

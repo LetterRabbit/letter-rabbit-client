@@ -1,0 +1,18 @@
+$typo-map: (
+  bold: 700,
+  normal: 400,
+  logo: 24px,
+  xl: 18px,
+  l: 16px,
+  m: 14px,
+  s: 12px,
+);
+
+@function _get-typo-value($key) {
+  @return map-get($typo-map, $key);
+}
+
+@mixin typo($sz: l, $wi: normal) {
+  font-size: _get-typo-value($sz);
+  font-weight: _get-typo-value($wi);
+}

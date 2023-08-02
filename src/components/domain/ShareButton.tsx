@@ -32,6 +32,7 @@ const ShareButton = () => {
     await navigator.clipboard.writeText(qrCode.self_domain);
     // TODO: alert 말고 Toast UI 작성하기
     alert('클립보드에 복사되었습니다.');
+    setIsModalOpened(prev => !prev);
   };
 
   return (
@@ -52,7 +53,7 @@ const ShareButton = () => {
             소중함의 QR코드를 <br />
             복사할까요?
           </span>
-          <img src={qrCode.qr_domain} alt="QR 코드" />
+          {qrCode.qr_domain && <img src={qrCode.qr_domain} alt="QR 코드" />}
         </Modal>
       )}
     </div>

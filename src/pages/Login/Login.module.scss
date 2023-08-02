@@ -2,27 +2,31 @@
 @import '@/styles/color';
 
 .loginWrapper {
-  @include column-flexbox();
+  @include column-flexbox('between');
   position: relative;
+  padding: 60px;
   height: 100vh;
   background-color: white;
 }
 
+.infoBox {
+  @include column-flexbox();
+}
+
 .title {
+  @include typo(logo, bold);
   margin-top: 43px;
-  font-size: 24px;
-  font-weight: 700;
   color: $logo;
 }
 
 .subTitle {
+  @include typo(xl);
   margin-top: 18px;
-  font-size: 18px;
-  font-weight: 400;
-  color: lightGray;
+  color: $lightGray;
 }
 
 .btnWrap {
   position: absolute;
+  width: 100%;
   bottom: 60px;
 }

@@ -1,0 +1,45 @@
+@import '@/styles/mixins';
+@import '@/styles/color';
+
+.backBtn {
+  position: absolute;
+  top: 37px;
+  left: 37px;
+  cursor: pointer;
+}
+
+.container {
+  @include column-flexbox('between');
+  position: relative;
+  margin-top: 50px;
+  width: 100%;
+  height: 100%;
+}
+
+.mailBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 34px;
+}
+
+.recipient {
+  font-size: 18px;
+}
+
+.mail {
+  padding: 15px;
+  width: 100%;
+  height: 55vh;
+  border-radius: 8px;
+  background-color: $mainBackground;
+  font-family: Noto Sans;
+  overflow: scroll;
+  resize: none;
+}
+
+.sender {
+  padding: 10px 13px;
+  border-radius: 8px;
+  background-color: $mainBackground;
+}
