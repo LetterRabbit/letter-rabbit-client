@@ -1,0 +1,20 @@
+@import '@/styles/mixins';
+@import '@/styles/color';
+
+.container {
+  @include column-flexbox('between');
+  position: relative;
+  padding: 60px 50px;
+  height: 100vh;
+  color: $mainBlack;
+}
+
+.mainTitle {
+  margin-top: 100px;
+  font-weight: 400;
+}
+
+.description {
+  line-height: 1.5;
+  text-align: center;
+}

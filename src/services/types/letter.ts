@@ -32,3 +32,14 @@ export type MailBox = {
   desc: string;
   created_at: string;
 };
+
+export interface GetLetterUser {
+  message: CheckUser;
+}
+
+export type CheckUser = {
+  user_name: string;
+  mailbox_position_id: number;
+  address: string;
+  mailbox_name: string;
+};

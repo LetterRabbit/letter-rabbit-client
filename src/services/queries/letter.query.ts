@@ -5,6 +5,8 @@ import {
   getLetterList,
   getMail,
   getMailBox,
+  getUser,
+  postMail,
 } from '../api/letter.service';
 
 export const useArticlesQuery = (params: any) =>
@@ -34,3 +36,14 @@ export const useOpenMail = (params: string) =>
     const res = await getMail(params);
     return res;
   });
+
+export const useCreateMailMutation = (params: string) => {
+  return useMutation((body: Record<string, any>) => postMail(params, body));
+};
+
+export const useGetUser = (params: string) => {
+  return useQuery(['getUser'], async () => {
+    const res = await getUser(params);
+    return res;
+  });
+};

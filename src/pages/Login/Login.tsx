@@ -6,19 +6,20 @@ import css from './Login.module.scss';
 const Login = () => {
   return (
     <main className={css.loginWrapper}>
-      <img src={logo} alt="test" />
-      <h1 className={css.title}>너를 위함</h1>
-      <h2 className={css.subTitle}>
-        당신의 <strong>소중함</strong>을 전달하세요
-      </h2>
-      <div className={css.btnWrap}>
-        <Button
-          type="kakao"
-          font="bold"
-          title="카카오톡으로 시작하기"
-          clickAction={getKakaoAuth}
-        />
+      <div></div>
+      <div className={css.infoBox}>
+        <img src={logo} alt="mail" />
+        <h1 className={css.title}>너를 위함</h1>
+        <h2 className={css.subTitle}>
+          당신의 <strong>소중함</strong>을 전달하세요
+        </h2>
       </div>
+      <Button
+        type="kakao"
+        font="bold"
+        title="카카오톡으로 시작하기"
+        clickAction={getKakaoAuth}
+      />
     </main>
   );
 };
